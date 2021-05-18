@@ -13,9 +13,7 @@ const base = [
     }
 ]
 
-bot.start((ctx) => {
-    ctx.reply(startMessage);
-})
+bot.start((ctx) => ctx.reply(startMessage));
 
 bot.on('text', (ctx) => {
     //console.log (ctx);
