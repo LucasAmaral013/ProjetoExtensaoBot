@@ -1,7 +1,8 @@
-require('dotenv').config()
+const dotenv = require("dotenv");
+dotenv.config();
 const { Telegraf } = require ('telegraf');
 
-const Bot = new Telegraf(process.env.TOKEN);
+const bot = new Telegraf(process.env.TOKEN);
 
 const startMessage = 'Bem vindo, terráqueo!';
 const sorryMessage = 'Lamento. ainda não tenho informações sobre isso!';
