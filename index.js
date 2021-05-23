@@ -8,12 +8,34 @@ const tecladoOpcoes = Markup.keyboard([
   ['Linguagens de programação'],
   ['Tipos de Estruturas'],
   ['Tipos de Variáveis'],
+  ['Sair']
+]).resize().oneTime()
+
+const tecladoEstruturas = Markup.keyboard([
+  ['Estruturas Condicionais'],
+  ['Estruturas de Repetição'],
+  ['Voltar pras opções anteriores']
 ]).resize()
+
+const tecladoCondicionais = Markup.keyboard([
+  ['if/else'],
+  ['switch/case'],
+  ['Voltar pros tipos de estruturas']
+]).resize()
+
+const tecladoRepeticao = Markup.keyboard([
+  ['for'],
+  ['while'],
+  ['do-while'],
+  ['Voltar pros tipos de estruturas']
+])
+
+
 
 bot.start(async ctx => {
   await ctx.reply(`Seja bem vindo, ${ctx.update.message.from.first_name}!`)
   await ctx.reply(`Como posso te ajudar?`,
-    Markup.keyboard(['Quem é você?', 'Quero começar a aprender!']).resize())
+    Markup.keyboard(['Quem é você?', 'Quero começar a aprender!', 'Sair']).resize().oneTime())
 })
 
 bot.hears('Quem é você?', async ctx => {
@@ -28,7 +50,7 @@ bot.hears('Opa, vamos nessa!', async ctx => {
 })
 
 bot.hears('Hoje não, fica pra próxima!', async ctx => {
-  await ctx.reply('Que pena, espero te ver novamente em breve')
+  await ctx.reply(`Que pena ${ctx.update.message.from.first_name}, espero te ver novamente em breve.`)
   await ctx.reply('Lembre-se que você pode sempre voltar a falar comigo usando o comando /start')
 })
 
@@ -42,20 +64,57 @@ bot.hears('Linguagens de programação', async ctx => {
   await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
 })
 
-bot.hears('Tipos de Estruturas', ctx => 
-  ctx.reply(`Os dois tipos mais conhecidos de estruturas dentro da programação são as estruturas Condicionais e de Repetição. Gostaria de conhecer melhor alguma dessas estruturas?`,
-  Markup.keyboard(['Estruturas Condicionais', 'Estruturas de Repetição', 'Voltar pras opções anteriores']).resize()))
+bot.hears('Tipos de Estruturas', async ctx => {
+  await ctx.reply(`Os dois tipos mais conhecidos de estruturas dentro da programação são as estruturas Condicionais e de Repetição.`)
+  await ctx.reply('Gostaria de conhecer melhor alguma dessas estruturas?', tecladoEstruturas)
+})
 
+//fazer bot.hears estruturas condicionais, estruturas de repetição, if/else, switch/case, while, do, for
 
-  
-  /*bot.hears('Tipos de Variáveis', ctx.reply(`Opa, ainda estou aprendendo sobre isso!`))
+bot.hears('Estruturas Condicionais', async ctx => {
+  await ctx.reply(`As estruturas condicionais possibilitam ao programa tomar decisões e alterar o seu fluxo de execução. Isso possibilita ao desenvolvedor o poder de controlar quais são as tarefas e trechos de código executados de acordo com diferentes situações, como os valores de variáveis.`)
+  await ctx.reply(`As estruturas de repetição são o if/else e switch/case.`)
+  await ctx.reply('Gostaria de ouvir mais sobre alguma delas?', tecladoCondicionais)
+})
 
-  bot.hears('Estruturas Condicionais', ctx.reply(`Opa, ainda estou aprendendo sobre isso`))
+bot.hears('Estruturas de Repetição', async ctx => {
+  await ctx.reply(`Estruturas de repetição, também conhecidas como loops (laços), são utilizadas para executar repetidamente uma instrução ou bloco de instrução enquanto determinada condição estiver sendo satisfeita.`)
+  await ctx.reply(`As principais estruturas de repetição na maioria das linguagens são o for, while e do-while.`)
+  await ctx.reply('Gostaria de ouvir mais sobre alguma delas?', tecladoRepeticao)
+})
 
-  bot.hears('Estruturas de Repetição', ctx.reply(`Opa, ainda estou aprendendo sobre isso`))*/
+bot.hears('if/else', async ctx => {
+  await ctx.reply(`O if/else é uma estrutura de condição em que uma expressão booleana é analisada. Quando a condição que estiver dentro do if for verdadeira, ela é executada.`)
+  await ctx.reply(`Já o else é utilizado para definir o que é executado quando a condição analisada pelo if for falsa. Caso o if seja verdadeiro e, consequentemente executado, o else não é executado.`,
+  tecladoCondicionais)
+})
 
-  bot.hears('Voltar pras opções anteriores', async ctx => {
-    await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
-  })
+bot.hears('switch/case', async ctx => {
+  await ctx.reply(`A estrutura condicional switch/case vem como alternativa em momentos em que temos que utilizar múltiplos ifs no código, pois múltiplos if/else encadeados tendem a tornar o código muito extenso, pouco legível e com baixo índice de manutenção.`)
+  await ctx.reply(`O switch/case testa o valor contido em uma variável, realizando uma comparação com cada uma das opções. Cada uma dessas possíveis opções é delimitada pela instrução case.`)
+  await ctx.reply(`Podemos ter quantos casos de análise forem necessários e, quando um dos valores corresponder ao da variável, o código do case correspondente será executado. Caso a variável não corresponda a nenhum dos casos testados, o último bloco será executado, chamado de default (padrão).`,
+  tecladoCondicionais)
+})
+
+bot.hears('for', async ctx => {
+  await ctx.reply(`O for é uma estrutura de repetição que na qual seu ciclo será executado de acordo com três variáveis.`)
+  await ctx.reply(`Quando utilizamos o for, precisamos de uma variável para auxiliar a controlar a quantidade de repetições a serem executadas. Essa variável é chamada de variável de controle e é declarada no primeiro argumento do for.`)
+  await ctx.reply(`O segundo argumento do for é utilizado para definir até quando o for será executado. Geralmente, trata-se de uma condição booleana em cima da variável de controle.`)
+  await ctx.reply(`O terceiro argumento indica o quanto a variável de controle será modificada no final de cada execução dentro do for.`,
+  tecladoRepeticao)
+})
+
+bot.hears('Voltar pros tipos de estruturas', async ctx => {
+  await ctx.reply ('O que gostaria de aprender agora?', tecladoEstruturas)
+})
+
+bot.hears('Voltar pras opções anteriores', async ctx => {
+  await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
+})
+
+bot.hears('Sair', async ctx => {
+  await ctx.reply(`Tudo bem ${ctx.update.message.from.first_name}, nos vemos na próxima!`)
+  await ctx.reply('Lembre-se que você pode sempre voltar a falar comigo usando o comando /start')
+})
 
 bot.startPolling()
