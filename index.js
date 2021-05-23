@@ -1,41 +1,24 @@
 require('dotenv').config();
 const { Telegraf } = require ('telegraf');
-const {MenuTemplate, MenuMiddleware} = require('telegraf-inline-menu');
+const Markup = require ('telegraf/markup')
 
 const bot = new Telegraf (process.env.TOKEN);
 
-//Mensagens basicas
-const helpMessage = 'Sou fácil de usar. Basta perguntar!';
-const settingsMessage = 'Ainda não tenho configurações para ajudar nisso';
-const sorryMessage = 'Lamento. Ainda não sei nada a respeito.';
+const tecladoInicial = Markup.keyboard([
+  ['Linguagens de programação'],
+  ['Tipos de Estruturas'],
+]).resize().extra()
 
-bot.start(ctx => {
-    const from = ctx.update.message.from
-    console.log(from)
-    ctx.reply(`Seja bem vindo, ${from.first_name}!\nEstou aqui pra te ensinar a programar!`)
-})
-bot.help ((ctx) => ctx.reply(helpMessage));
-bot.settings((ctx) => ctx.reply(settingsMessage));
-
-
-const menuTemplate = new MenuTemplate(ctx => 'Hello')
-
-menuTemplate.interact('I am excited!', 'a', {
-  do: async ctx => {
-      ctx.reply('As am I!')
-      return false
-  }
+bot.start(async ctx => {
+  await ctx.reply(`Seja bem vindo, ${ctx.update.message.from.first_name}. Estou aqui para te ensinar programação!`)
+  await ctx.reply(`O que gostaria de saber primeiro?`,
+    Markup.keyboard(['teste1', 'teste2']).resize().oneTime().extra())
 })
 
-const menuMiddleware = new MenuMiddleware('/', menuTemplate)
-bot.command('menu', ctx => menuMiddleware.replyToContext(ctx))
-bot.use(menuMiddleware)
+bot.hears(['teste1', 'teste2'], async ctx => {
+  await ctx.reply('Entendido, vamos começar o aprendizado!')
+  await ctx.reply('O que gostaria de aprender?', tecladoInicial)
+})
 
-bot.on('sticker', (ctx) => ctx.reply(':thumbsup:'))
-
-//fazer o help
-bot.launch();
-/*se nosso SO tentar interromper a execução do NodeJS,
-avisamos os servidores do telegram*/
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+bot.hears('Linguagens de programação', ctx => ctx.reply('explicação1'))
+bot.hears('Tipos de Estruturas', ctx => ctx.reply('explicação2'))
