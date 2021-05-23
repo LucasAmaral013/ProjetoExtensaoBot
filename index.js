@@ -5,12 +5,15 @@ const {MenuTemplate, MenuMiddleware} = require('telegraf-inline-menu');
 const bot = new Telegraf (process.env.TOKEN);
 
 //Mensagens basicas
-const startMessage = 'Bem vindo!';
 const helpMessage = 'Sou fácil de usar. Basta perguntar!';
 const settingsMessage = 'Ainda não tenho configurações para ajudar nisso';
 const sorryMessage = 'Lamento. Ainda não sei nada a respeito.';
 
-bot.start ((ctx) => ctx.reply(startMessage));
+bot.start(ctx => {
+    const from = ctx.update.message.from
+    console.log(from)
+    ctx.reply(`Seja bem vindo, ${from.first_name}!\nEstou aqui pra te ensinar a programar!`)
+})
 bot.help ((ctx) => ctx.reply(helpMessage));
 bot.settings((ctx) => ctx.reply(settingsMessage));
 
@@ -23,6 +26,22 @@ menuTemplate.interact('I am excited!', 'a', {
       return false
   }
 })
+
+//teste (apagar depois1)
+bot.on('text', (ctx) => {
+    //console.log (ctx);
+    try{
+        const resp = base.find(item => {
+            return ctx.message.text.toLowerCase().includes(item.chave);
+        })
+        ctx.reply(resp.valor);
+    }
+    catch (err){
+        console.log(err);
+        ctx.reply(sorryMessage);
+    }
+})
+//teste (apagar depois2)
 
 const menuMiddleware = new MenuMiddleware('/', menuTemplate)
 bot.command('menu', ctx => menuMiddleware.replyToContext(ctx))
