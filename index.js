@@ -55,6 +55,10 @@ bot.help (async ctx => {
 Observação: Esses comandos não aparecerão nos botões do canto inferior do chat. Você deve utilizá-los digitando no teclado, ou clicando sobre eles.`)
 })
 
+/*bot.menu (async ctx => {
+  await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
+})*/
+
 bot.hears('Quem é você?', async ctx => {
   await ctx.reply('Meu nome é C3-PO, e sou um robô programado para ensinar tudo sobre programação para novos desenvolvedores!')
   await ctx.reply('Gostaria de começar seu aprendizado?',
