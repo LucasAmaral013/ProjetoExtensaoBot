@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Telegraf } = require ('telegraf');
-const Markup = require ('telegraf/markup')
+const Markup = require ('telegraf/markup');
 
 const bot = new Telegraf (process.env.TOKEN);
 
@@ -23,6 +23,4 @@ bot.start(async ctx => {
 bot.hears('Linguagens de programação', ctx => ctx.reply('explicação1'))
 bot.hears('Tipos de Estruturas', ctx => ctx.reply('explicação2'))*/
 
-bot.launch();
-process.once('SIGINT', () => bot.stop ("SIGINT"));
-process.once("SIGTerm", () => bot.stop ("SIGTERM"));
+bot.startPolling()
