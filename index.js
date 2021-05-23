@@ -4,6 +4,13 @@ const { Markup } = require ('telegraf');
 
 const bot = new Telegraf (process.env.TOKEN);
 
+const tecladoInicial = Markup.keyboard([
+  ['Quem é você?'], 
+  ['Quero começar a aprender!'], 
+  ['Ajuda'], 
+  ['Sair']
+]).resize().oneTime()
+
 const tecladoOpcoes = Markup.keyboard([
   ['Linguagens de programação'],
   ['Tipos de Estruturas'],
@@ -30,12 +37,22 @@ const tecladoRepeticao = Markup.keyboard([
   ['Voltar pros tipos de estruturas']
 ])
 
-
-
 bot.start(async ctx => {
   await ctx.reply(`Seja bem vindo, ${ctx.update.message.from.first_name}!`)
-  await ctx.reply(`Como posso te ajudar?`,
-    Markup.keyboard(['Quem é você?', 'Quero começar a aprender!', 'Sair']).resize().oneTime())
+  await ctx.reply(`Como posso te ajudar?`, tecladoInicial)
+})
+
+bot.help (async ctx => {
+  await ctx.reply('Para navegar entre minhas opções, basta utilizar os botões que aparecem no canto inferior do chat.')
+  await ctx.reply(`Abaixo estão algumas opções de comandos que você pode utilizar a qualquer momento da nossa conversa:
+
+/start - Esse comando dá inicio ao chat. Você pode utilizá-lo sempre que quiser iniciar nossa conversa do zero
+
+/help - Você pode utilizar esse comando para rever essa mensagem de ajuda
+
+/menu - Esse comando mostra o primeiro menu de opções de aprendizado. Você pode utilizá-lo quando já estiver habituado com o mu funcionamento, e não quiser mais remoçar o chat do zero.
+
+Observação: Esses comandos não aparecerão nos botões do canto inferior do chat. Você deve utilizá-los digitando no teclado, ou clicando sobre eles.`)
 })
 
 bot.hears('Quem é você?', async ctx => {
@@ -110,6 +127,19 @@ bot.hears('Voltar pros tipos de estruturas', async ctx => {
 
 bot.hears('Voltar pras opções anteriores', async ctx => {
   await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
+})
+
+bot.hears('Ajuda', async ctx => {
+  await ctx.reply('Para navegar entre minhas opções, basta utilizar os botões que aparecem no canto inferior do chat.')
+  await ctx.reply(`Abaixo estão algumas opções de comandos que você pode utilizar a qualquer momento da nossa conversa:
+  
+/start - Esse comando dá inicio ao chat. Você pode utilizá-lo sempre que quiser iniciar nossa conversa do zero
+
+/help - Você pode utilizar esse comando para rever essa mensagem de ajuda
+
+/menu - Esse comando mostra o primeiro menu de opções de aprendizado. Você pode utilizá-lo quando já estiver habituado com o mu funcionamento, e não quiser mais remoçar o chat do zero.
+
+Observação: Esses comandos não aparecerão nos botões do canto inferior do chat. Você deve utilizá-los digitando no teclado, ou clicando sobre eles.`)
 })
 
 bot.hears('Sair', async ctx => {
