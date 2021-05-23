@@ -37,8 +37,25 @@ bot.hears('Quero começar a aprender!', async ctx => {
   await ctx.reply('O que gostaria de aprender primeiro?', tecladoOpcoes)
 }) 
 
-bot.hears('Linguagens de programação', ctx => ctx.reply(`Linguagens de programação são a forma com a qual conseguimos fornecer dados, ordens e ações para a criação de programas que são capazes de controlar o comportamento físico de uma máquina. Algumas linguagens de programação bastante conhecidas são Java, Python e HTML`))
-bot.hears('Tipos de Estruturas', ctx => ctx.reply(`Os dois tipos mais conhecidos de estruturas dentro da programação são as estruturas Condicionais e de Repetição. Qual das duas você gostaria de conhecer melhor?`))
-bot.hears('Tipos de Variáveis', ctx.reply(`Opa, ainda estou aprendendo sobre isso!`))
+bot.hears('Linguagens de programação', async ctx => {
+  await ctx.reply(`Linguagens de programação são a forma com a qual conseguimos fornecer dados, ordens e ações para a criação de programas que são capazes de controlar o comportamento físico de uma máquina. Algumas linguagens de programação bastante conhecidas são Java, Python e HTML`)
+  await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
+})
+
+bot.hears('Tipos de Estruturas', ctx => 
+  ctx.reply(`Os dois tipos mais conhecidos de estruturas dentro da programação são as estruturas Condicionais e de Repetição. Gostaria de conhecer melhor alguma dessas estruturas?`,
+  Markup.keyboard(['Estruturas Condicionais', 'Estruturas de Repetição', 'Voltar pras opções anteriores']).resize()))
+
+
+  
+  /*bot.hears('Tipos de Variáveis', ctx.reply(`Opa, ainda estou aprendendo sobre isso!`))
+
+  bot.hears('Estruturas Condicionais', ctx.reply(`Opa, ainda estou aprendendo sobre isso`))
+
+  bot.hears('Estruturas de Repetição', ctx.reply(`Opa, ainda estou aprendendo sobre isso`))*/
+
+  bot.hears('Voltar pras opções anteriores', async ctx => {
+    await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
+  })
 
 bot.startPolling()
