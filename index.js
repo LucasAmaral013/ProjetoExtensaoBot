@@ -22,3 +22,7 @@ bot.hears(['teste1', 'teste2'], async ctx => {
 
 bot.hears('Linguagens de programação', ctx => ctx.reply('explicação1'))
 bot.hears('Tipos de Estruturas', ctx => ctx.reply('explicação2'))
+
+bot.launch();
+process.once('SIGINT', () => bot.stop ("SIGINT"));
+process.once("SIGTerm", () => bot.stop ("SIGTERM"));
