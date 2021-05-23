@@ -27,22 +27,6 @@ menuTemplate.interact('I am excited!', 'a', {
   }
 })
 
-//teste (apagar depois1)
-bot.on('text', (ctx) => {
-    //console.log (ctx);
-    try{
-        const resp = base.find(item => {
-            return ctx.message.text.toLowerCase().includes(item.chave);
-        })
-        ctx.reply(resp.valor);
-    }
-    catch (err){
-        console.log(err);
-        ctx.reply(sorryMessage);
-    }
-})
-//teste (apagar depois2)
-
 const menuMiddleware = new MenuMiddleware('/', menuTemplate)
 bot.command('menu', ctx => menuMiddleware.replyToContext(ctx))
 bot.use(menuMiddleware)
