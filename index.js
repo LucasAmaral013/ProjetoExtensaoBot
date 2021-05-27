@@ -16,7 +16,7 @@ const tecladoOpcoes = Markup.keyboard([
   ['Tipos de Estruturas'],
   ['Tipos de Variáveis'],
   ['Sair']
-]).resize().oneTime()
+]).resize()
 
 const tecladoEstruturas = Markup.keyboard([
   ['Estruturas Condicionais'],
@@ -35,7 +35,7 @@ const tecladoRepeticao = Markup.keyboard([
   ['while'],
   ['do-while'],
   ['Voltar pros tipos de estruturas']
-])
+]).resize()
 
 bot.start(async ctx => {
   await ctx.reply(`Seja bem vindo, ${ctx.update.message.from.first_name}!`)
@@ -118,11 +118,21 @@ bot.hears('switch/case', async ctx => {
 })
 
 bot.hears('for', async ctx => {
-  await ctx.reply(`O for é uma estrutura de repetição que na qual seu ciclo será executado de acordo com três variáveis.`)
+  await ctx.reply(`O for é uma estrutura de repetição na qual seu ciclo será executado de acordo com três variáveis.`)
   await ctx.reply(`Quando utilizamos o for, precisamos de uma variável para auxiliar a controlar a quantidade de repetições a serem executadas. Essa variável é chamada de variável de controle e é declarada no primeiro argumento do for.`)
   await ctx.reply(`O segundo argumento do for é utilizado para definir até quando o for será executado. Geralmente, trata-se de uma condição booleana em cima da variável de controle.`)
   await ctx.reply(`O terceiro argumento indica o quanto a variável de controle será modificada no final de cada execução dentro do for.`,
   tecladoRepeticao)
+})
+
+bot.hears('while', async ctx => {
+  await ctx.reply (``)
+  await ctx.reply ('O que gostaria de aprender agora?', tecladoRepeticao)
+})
+
+bot.hears('do-while', async ctx => {
+  await ctx.reply (``)
+  await ctx.reply ('O que gostaria de aprender agora?', tecladoRepeticao)
 })
 
 bot.hears('Voltar pros tipos de estruturas', async ctx => {
