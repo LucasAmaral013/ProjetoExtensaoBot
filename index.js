@@ -126,12 +126,13 @@ bot.hears('for', async ctx => {
 })
 
 bot.hears('while', async ctx => {
-  await ctx.reply (``)
+  await ctx.reply (`Esta instrução é usada quando não sabemos quantas vezes um determinado bloco de instruções precisa ser repetido.`)
+  await ctx.reply (`Com o while, o corpo do laço de repetição com seus respectivos comandos apenas será executado se a condição for verdadeira. Portanto, assim que a condição não for mais verdadeira, o conteúdo não será mais repetido.`)
   await ctx.reply ('O que gostaria de aprender agora?', tecladoRepeticao)
 })
 
 bot.hears('do-while', async ctx => {
-  await ctx.reply (``)
+  await ctx.reply (`O do/while tem quase o mesmo funcionamento que o while, a diferença é que com o uso dele teremos os comandos executados ao menos uma única vez.`)
   await ctx.reply ('O que gostaria de aprender agora?', tecladoRepeticao)
 })
 
