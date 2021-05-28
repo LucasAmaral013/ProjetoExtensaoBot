@@ -7,8 +7,7 @@ const bot = new Telegraf (process.env.TOKEN);
 const tecladoInicial = Markup.keyboard([
   ['Quem é você?'], 
   ['Quero começar a aprender!'], 
-  ['Ajuda'], 
-  ['Sair']
+  ['Ajuda', 'Sair']
 ]).resize().oneTime()
 
 const tecladoOpcoes = Markup.keyboard([
@@ -25,15 +24,12 @@ const tecladoEstruturas = Markup.keyboard([
 ]).resize()
 
 const tecladoCondicionais = Markup.keyboard([
-  ['if/else'],
-  ['switch/case'],
+  ['if/else', 'switch/case'],
   ['Voltar pros tipos de estruturas']
 ]).resize()
 
 const tecladoRepeticao = Markup.keyboard([
-  ['for'],
-  ['while'],
-  ['do-while'],
+  ['for', 'while', 'do-while'],
   ['Voltar pros tipos de estruturas']
 ]).resize()
 
