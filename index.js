@@ -5,7 +5,7 @@ const { Extra } = require ('telegraf');
 
 const bot = new Telegraf (process.env.TOKEN);
 
-// teclados Markup.keyboard
+// teclados Markup.keyboard 
 
 const tecladoInicial = Markup.keyboard([
   ['Quem é você?'], 
