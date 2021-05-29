@@ -20,6 +20,13 @@ const tecladoOpcoes = Markup.keyboard([
   ['Sair']
 ]).resize()
 
+const tecladoVariaveis = Markup.keyboard([
+  ['int', 'float'],
+  ['String', 'char'],
+  ['double', 'boolean'],
+  ['Voltar pras opções anteriores']
+]).resize()
+
 const tecladoEstruturas = Markup.keyboard([
   ['Estruturas Condicionais'],
   ['Estruturas de Repetição'],
@@ -87,13 +94,58 @@ bot.hears('Linguagens de programação', async ctx => {
   await ctx.reply('O que gostaria de aprender agora?', tecladoOpcoes)
 })
 
+bot.hears('Tipos de Variáveis', async ctx => {
+  await ctx.reply('Quanto estamos desenvolvendo um código, é possível declarar variáveis informando' +
+  ' o tipo de daos que ela irá receber (como números ou letras, por exemplo).')
+  await ctx.reply('Esse é um recurso que utilizamos para armazenar um valor dentro da memóri, assim, sempre' +
+  ' que precisarmos deste valor, basta referenciarmos essavariável.')
+  await ctx.reply('O valor de uma variável pode ser alterado a qualquer momento no decorrer do códio,' +
+  ' porém algumas linguagens como Java também permitem a declaração de uma constante, que possui um valor' +
+  'estático até o final.')
+  await ctx.reply('Qual tipo de variáveis gostaria de conhecer primeiro?', tecladoVariaveis)
+})
+
+bot.hears('int', async ctx => {
+  await ctx.reply('A variável int armazena um número inteiro, positivo ou negativo.')
+  await ctx.reply('Exemplos de variáveis ou contantes int são: -2, -1, 0, 1, 2.')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
+bot.hears('float', async ctx => {
+  await ctx.reply('Uma variável do tipo float armazena números reais (com ponto flutuante) com precisão simples.')
+  await ctx.reply('Exemplos desse tipo seriam: 2.3, 4.1, 7.5')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
+bot.hears('String', async ctx => {
+  await ctx.reply('Uma String armazena um conjunto de caracteres, ou resumidamente, um texto.')
+  await ctx.reply('Um exemplo de String seria: "Hello world".')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
+bot.hears('char', async ctx => {
+  await ctx.reply('Diferentemente de uma String, uma variável do tipo char armazena apenas um caractere.')
+  await ctx.reply('Exemplos de variáveis char são: a, b, c.')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
+bot.hears('double', async ctx => {
+  await ctx.reply('Semelhante ao float, o double também armazena números reais, porém com precisão dupla.' +
+  ' Em geral, o double possui uma precisão de 15 digitos decimais.')
+  await ctx.reply('Um exemplo de variável double é: 3.68293819')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
+bot.hears('boolean', async ctx => {
+  await ctx.reply('A variável booleana pode representar apenas dois valores, sendo eles true ou false (em português, verdadeiro ou falso')
+  await ctx.reply('Qual tipo de variável você gostaria de aprender agora?', tecladoVariaveis)
+})
+
 bot.hears('Tipos de Estruturas', async ctx => {
   await ctx.reply('Os dois tipos mais conhecidos de estruturas dentro da programação são as estruturas' +
   ' Condicionais e de Repetição.')
   await ctx.reply('Gostaria de conhecer melhor alguma dessas estruturas?', tecladoEstruturas)
 })
-
-//fazer bot.hears estruturas condicionais, estruturas de repetição, if/else, switch/case, while, do, for
 
 bot.hears('Estruturas Condicionais', async ctx => {
   await ctx.reply('As estruturas condicionais possibilitam ao programa tomar decisões e alterar o seu fluxo' +
